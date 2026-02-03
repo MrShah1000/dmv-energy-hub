@@ -18,12 +18,15 @@ jobs:
           cache: "npm"
 
       - name: Install deps
-        run: npm ci
+        run: npm install --no-audit --no-fund
 
       - name: Build
         env:
           PUBLIC_ADS_ENABLED: "false"
         run: npm run build
+
+      - name: Verify build output
+        run: ls -la dist
 
       - name: Deploy to Firebase Hosting (live)
         uses: FirebaseExtended/action-hosting-deploy@v0
